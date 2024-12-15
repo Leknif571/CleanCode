@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./justeprix/Controller",
+        "./justeprix/Model",
+        "./justeprix/View"
+    ]
+}
