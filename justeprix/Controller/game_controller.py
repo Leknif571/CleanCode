@@ -6,7 +6,7 @@ class GameController:
     def __init__(self):
         self.view = GameView()
         self.game = Game()
-        self.player = Player(self.view.prompt_player_name())
+        self.player = Player(self.view.enter_player_name())
 
     def play_games(self):
         retry = True
@@ -22,25 +22,23 @@ class GameController:
             
 
     def play_game(self):
-        """Joue au jeu de devinettes."""
-        self.game.reset_current_attempts()  # Réinitialise les tentatives en cours
-        self.game.increment_total_attempts()  # Incrémente les tentatives totales
-        self.player.increment_games_played()  # Incrémente le nombre de parties jouées
+        self.game.reset_current_attempts()
+        self.game.increment_total_attempts()
+        self.player.increment_games_played()
         print(f"L'ordinateur a choisi un nombre entre 1 et 100.")
         
         while True:
-            guess = self.view.prompt_guess()  # Demande au joueur de deviner
-            self.game.increment_current_attempts()  # Incrémente les tentatives en cours
-            feedback = self.get_feedback(guess)
-            self.view.display_feedback(feedback)
+            guess = self.view.enter_guess() 
+            self.game.increment_current_attempts() 
+            response = self.return_response(guess)
+            self.view.display_return_response(response)
             
-            if feedback == "Correct":
+            if response == "Correct":
                 self.view.display_congratulations(self.player.get_name(), self.game.current_attempts)
-                self.player.increment_games_won()  # Si le joueur gagne, on incrémente le nombre de parties gagnées
+                self.player.increment_games_won() 
                 break
 
-    def get_feedback(self, guess):
-        """Retourne le feedback par rapport au nombre proposé."""
+    def return_response(self, guess):
         secret_number = self.game.get_secret_number()
         
         if guess < secret_number:
