@@ -17,3 +17,4 @@ class GameView:
 
     def display_congratulations(self, player_name, attempts):
         print(f"Bravo {player_name} ! Vous avez trouvé le nombre en {attempts} essais.")
+    

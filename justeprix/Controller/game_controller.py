@@ -3,10 +3,12 @@ from Model.player import Player
 from View.game_view import GameView
 
 class GameController:
+
     def __init__(self):
         self.view = GameView()
-        self.game = Game()
         self.player = Player(self.view.enter_player_name())
+        self.game = Game()
+
 
     def play_games(self):
         retry = True
@@ -20,10 +22,10 @@ class GameController:
             else:
                 print("Réponse invalide, tape 'o' ou 'n'.")
             
-
     def play_game(self):
         self.game.reset_current_attempts()
         self.game.increment_total_attempts()
+        self.game.set_secret_number()
         self.player.increment_games_played()
         print(f"L'ordinateur a choisi un nombre entre 1 et 100.")
         
